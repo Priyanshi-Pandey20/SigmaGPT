@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://sigmagpt-backend-4ldy.onrender.com";
 
 export const apiFetch = (endpoint, options = {}) => {
   const token = localStorage.getItem("token");
