@@ -5,6 +5,19 @@
     scrollbar-width: thin;
     scrollbar-color: #5c5c5c transparent;
 }
+.star-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.gptDiv:hover .star-btn { opacity: 1; }
+.star-btn:hover { color: #f59e0b; }
 
 /* WebKit-based browsers */
 .chats::-webkit-scrollbar {
@@ -29,23 +42,140 @@
 .userDiv{
     display: flex;
     justify-content: flex-end;
-    font-size: 0.9rem;      
+     font-size: var(--chat-font-size, 0.95rem);  
 }
 .gptDiv{
     text-align: left;
-    font-size: 0.9rem;
+     font-size: var(--chat-font-size, 0.95rem);
+    
+}
+.gptDiv p {
+    color: inherit;
+}
+/* VERY IMPORTANT: override markdown children */
+
+/* LIGHT MODE */
+body[data-theme="light"] .gptDiv {
+    color: #000;
+}
+
+/* DARK MODE */
+body[data-theme="dark"] .gptDiv {
+    color: #e4e4e4;
+}
+
+/* Let markdown inherit */
+.gptDiv * {
+    color: inherit;
 }
 .userMessage{
     background-color: #323232;
     padding: 10px 20px;
+     font-size: var(--chat-font-size, 0.95rem);
     border-radius: 14px;
     margin-left: 15rem;
     max-width: 500px;
 }
 .hljs{
-    border-radius: 14px !important ;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    display: block;
+    overflow-x: auto;
+    color: unset !important;  
     
 }
-pre{
-    white-space: pre-wrap;
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+body[data-theme="dark"] .copy-btn {
+    color: #ccc;
+}
+
+body[data-theme="light"] .copy-btn {
+    color: #444;
+}
+
+.copy-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+body[data-theme="light"] .copy-btn:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+pre:hover .copy-btn {
+    opacity: 1;
+}
+pre {
+    padding: 0 !important;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 10px 0;
+}
+/* LIGHT */
+/* LIGHT - clean code block that stands out from plain text */
+body[data-theme="light"] pre {
+    background-color: #2c81d6;
+    border: 1px solid #d0d7de;
+ 
+}
+
+body[data-theme="light"] .hljs {
+    background-color: #f6f8fa !important;
+    color: #24292e !important;
+}
+
+/* Inline code - light mode */
+body[data-theme="light"] code:not(pre code) {
+    background-color: #ffebdd;
+    color: #0550ae;              /* blue text for inline code */
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-family: monospace;
+}
+
+/* DARK MODE - code block background */
+body[data-theme="dark"] pre {
+    background-color: #1e1e1e;
+    border: 1px solid #3a3a3a;
+}
+body[data-theme="light"] code:not(pre code) {
+    background-color: #eef0f3;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 0.85em;
+}
+
+body[data-theme="dark"] code:not(pre code) {
+    background-color: #2d2d2d;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 0.85em;
+}
+
+
+/* Let markdown inherit color */
+.gptDiv * {
+    color: inherit;
+}
+body[data-theme="light"] .userMessage {
+    background-color: #e5e5e5;
+    color: #000;
+}
+
+body[data-theme="dark"] .userMessage {
+    background-color: #323232;
+    color: #fff;
 }

@@ -1,81 +1,148 @@
-.sidebar{
-    background-color: #171717;
-    color: #b4b4b4;
-    height: 100vh;
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+:root {
+  --bg-main: #212121;
+  --bg-sidebar: #171717;
+  --bg-card: #323232;
+  --text-main: #ffffff;
+  --text-secondary: #b4b4b4;
+  --input-bg: rgba(255,255,255,0.05);
+  --border-color: rgba(255,255,255,0.2);
+    --hover-bg: rgba(255,255,255,0.05);
 }
-button{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: transparent;
-    border: solid 0.5px rgba(255,255,255,0.5);
-    cursor: pointer;
 
+[data-theme="light"] {
+  --bg-main: #ffffff;
+  --bg-sidebar: #f5f5f5;
+  --bg-card: #eaeaea;
+  --text-main: #000000;
+  --text-secondary: #555;
+  --input-bg: rgba(0,0,0,0.05);
+   --border-color: rgba(0,0,0,0.2);
+     --hover-bg: rgba(0,0,0,0.05);
 }
-.logo{
-    height: 25px;
-    width: 25px;
-    background-color: #fff;
-    border-radius:50%;
-    object-fit: cover;
+/* Remove the old logo filters and replace with these */
 
+[data-theme="dark"] .logo {
+  filter: invert(1) brightness(1.5);
+  background-color: transparent;
 }
-button:hover{
-    background-color: rgba(180,180,180,0.05);
-}
-button span{
-    font-size: 20px;
-}
-.history{
-     margin: 10px;
-    padding: 10px;
-    height: 100%;
-    
-}
-.history li{
-    list-style-type: none;
-    cursor: pointer;
-    padding: 2px 5px;
-    margin-bottom: 0.3rem;
-    font-size: 14px;
-    border: solid 10px transparent;
 
+[data-theme="light"] .logo {
+  filter: invert(0);
+  background-color:  transparent;
 }
-.history li:hover{
-    background-color: rgba(180,180,180,0.05);
+.sidebar {
+ background-color: var(--bg-sidebar);
+  color: var(--text-main);
+  height: 100vh;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: transparent;
+ border: solid 0.5px var(--border-color);
+  cursor: pointer;
+}
+button i {
+  color: var(--text-main);
+}   
+.logo {
+  height: 25px;
+  width: 25px;
+  background-color: var(--bg-card);
+  border-radius: 50%;
+  object-fit: cover;
+}
+button:hover {
+ background-color: var(--hover-bg);
+}
+button span {
+  font-size: 20px;
+}
+.history {
+  margin: 10px;
+  padding: 10px;
+  flex: 1;
+  overflow-y: auto;
+    padding-top: 20px;
+  padding-bottom: 20px;
+ 
+}
+.history::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.history::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.history::-webkit-scrollbar-thumb {
+     background: var(--border-color);
     border-radius: 10px;
 }
-.sign{
-    padding: 10px;
-    margin: 10px;
-    font-size: 14px;
-    text-align: center;
-    border-top: solid 0.25px rgba(255,255,255,0.5);
 
-}
-.fa-trash{
-    opacity: 0;
-    position: absolute;
-    right: 0;
+.history::-webkit-scrollbar-thumb:hover {
+    background: rgba(180, 180, 180, 0.5);
 }
 .history li {
-    position: relative;
+  list-style-type: none;
+color: var(--text-main);
+  cursor: pointer;
+  padding: 2px 5px;
+  margin-bottom: 0.3rem;
+  font-size: 14px;
+  border: solid 10px transparent;
+}
+.history li:hover {
+   background-color: var(--hover-bg);
+  border-radius: 10px;
+}
+.sign {
+  padding: 12px;
+  margin: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--text-secondary);
+  border-top: solid 0.25px var(--border-color);
+}
+
+.sign span {
+  color: var(--text-main);
+  font-weight: 500;
+}
+.logo {
+  height: 28px;
+  width: 28px;
+  padding: 4px;
+  background-color: var(--bg-card);
+  border-radius: 50%;
+}
+.fa-trash {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+}
+.history li {
+  position: relative;
 }
 .history li:hover .fa-trash {
-    opacity: 1;
-    color: #fff;
+  opacity: 1;
+  color: var(--text-main);
 }
-.fa-trash:hover{
-    color: #f87171 !important;
+.fa-trash:hover {
+  color: #f87171 !important;
 }
-.highlighted{
-    background-color: rgba(180,180,180,0.05);
-    border-radius: 10px;
+.highlighted {
+ background-color: var(--hover-bg);
+  border-radius: 10px;
 }

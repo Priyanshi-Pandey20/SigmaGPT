@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import chatRoutes from "./routes/chat.js"
+import shareRoutes from "./routes/share.js";
+import authRoutes from "./routes/auth.js";
 
 dotenv.config();
 console.log("MONGO URI:", process.env.MONGODB_URI);
@@ -12,8 +14,14 @@ const app = express();
 const PORT = 8080;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 app.use("/api", chatRoutes);
+app.use("/api/share",shareRoutes)
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log("Server running on port 8080");

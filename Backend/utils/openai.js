@@ -1,29 +1,25 @@
-import "dotenv/config"
-import axios from "axios";
+import "dotenv/config";
+import Groq from "groq-sdk";
 
-const getOpenAPIRespone = async(message) =>{
+const groq = new Groq({ apiKey: process.env.API_KEY });
+
+const getOpenAPIRespone = async(message, systemPrompt = "You are a helpful assistant.") => {
     try {
-    const response = await axios.post(
-      "https://generativelanguage.googleapis.com/v1beta/interactions",
-      {
-        model: "gemini-3-flash-preview",
-        input: message
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": process.env.GEMINI_API_KEY
-        }
-      }
-    );
+        const response = await groq.chat.completions.create({
+            model: "llama-3.3-70b-versatile",
+            messages: [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: message }
+            ]
+        });
 
-     const reply = response.data.outputs.find(o => o.type === "text")?.text;
-     return reply;
-    
-  } catch (error) {
-    console.error(error.response?.data || error.message);
-       throw new Error("Something went wrong"); 
-  }
+        const reply = response.choices[0]?.message?.content;
+        return reply;
+
+    } catch(error) {
+        console.error(error.message);
+        throw new Error("Something went wrong");
+    }
 }
 
 export default getOpenAPIRespone;

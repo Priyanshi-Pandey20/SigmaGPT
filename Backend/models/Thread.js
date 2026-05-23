@@ -5,12 +5,10 @@ const MessageSchema = new mongoose.Schema({
         type:String,
         enum:["user","assistant"],
         required:true
-
     },
     content:{
         type:String,
         required:true
-
     },
     timestamp:{
         type:Date,
@@ -23,7 +21,11 @@ const ThreadSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true
-
+    },
+    userId:{                          // ✅ added
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required:true
     },
     title:{
         type:String,
